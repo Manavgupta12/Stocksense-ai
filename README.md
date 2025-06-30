@@ -22,9 +22,20 @@
 
 ---
 
-## 📸 Screenshot
+## 🖼️ App Screenshots
 
-![Stock Prediction App Screenshot](sample_output.png)
+### 🔹 Home & Input Panel
+![Home](screenshot_home.jpg)
+
+---
+
+### 🔹 Chart Visualization (Tata Steel Example)
+![Chart](screenshot_chart.jpg)
+
+---
+
+### 🔹 Prediction Results with MSE
+![Prediction](screenshot_prediction.jpg)
 
 ---
 
