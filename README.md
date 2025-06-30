@@ -6,7 +6,7 @@
 
 ## 🚀 Live Demo
 
-👉 [Click here to launch the app]([https://stocksense-ai.streamlit.app](https://stocksense-ai-hkja3psyigojv9ajbymdmo.streamlit.app))  
+👉 [Click here to launch the app]((https://stocksense-ai-hkja3psyigojv9ajbymdmo.streamlit.app))  
 (*Deploy via Streamlit Cloud for free hosting*)
 
 ---
