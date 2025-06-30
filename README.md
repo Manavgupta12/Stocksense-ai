@@ -24,18 +24,18 @@
 
 ## 🖼️ App Screenshots
 
-### 🔹 Home & Input Panel
-![Home](screenshot_home.jpg)
+### 🔹 Home & Company Selection
+<img src="Screenshots/screenshot_home.jpg" width="600"/>
 
 ---
 
-### 🔹 Chart Visualization (Tata Steel Example)
-![Chart](screenshot_chart.jpg)
+### 🔹 Stock Chart Visualization
+<img src="Screenshots/screenshot_chart.jpg" width="600"/>
 
 ---
 
-### 🔹 Prediction Results with MSE
-![Prediction](screenshot_prediction.jpg)
+### 🔹 Prediction Results (ML Model)
+<img src="Screenshots/screenshot_prediction.jpg" width="600"/>
 
 ---
 
