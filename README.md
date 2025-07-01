@@ -22,6 +22,16 @@
 
 ---
 
+## 🔍 How It Works
+
+1. Fetches historical stock data using `yfinance`
+2. Calculates technical indicators like MA, RSI, volatility
+3. Trains a Random Forest model on past data
+4. Predicts closing prices for future days (1–30)
+5. Displays insights, trends & allows CSV export
+
+---
+
 ## 🖼️ App Screenshots
 
 ### 🔹 1.
@@ -60,7 +70,18 @@
 ## 🧪 Local Installation
 
 ```bash
-git clone https://github.com/your-username/tickerbeat-ai.git
+git clone https://github.com/Manavgupta12/tickerbeat-ai.git
 cd tickerbeat-ai    
 pip install -r requirements.txt
 streamlit run apple.py
+
+```
+📝 License
+
+This project is open-source and free to use under the MIT License.
+
+---
+
+🌟 Show Some ❤️
+
+If you like the project, drop a ⭐ on GitHub and share with your peers!
