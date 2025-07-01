@@ -55,7 +55,7 @@
 ## 🧪 Local Installation
 
 ```bash
-git clone https://github.com/your-username/stocksense-ai.git
-cd stocksense-ai    
+git clone https://github.com/your-username/tickerbeat-ai.git
+cd tickerbeat-ai    
 pip install -r requirements.txt
 streamlit run apple.py
