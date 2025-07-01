@@ -24,18 +24,23 @@
 
 ## 🖼️ App Screenshots
 
-### 🔹 Home & Company Selection
-<img src="Screenshots/screenshot_home.jpg" width="600"/>
+### 🔹 1.
+<img src="Screenshots/0001.jpg" width="600"/>
 
 ---
 
-### 🔹 Stock Chart Visualization
-<img src="Screenshots/screenshot_chart.jpg" width="600"/>
+### 🔹 2.
+<img src="Screenshots/0002.jpg" width="600"/>
 
 ---
 
-### 🔹 Prediction Results (ML Model)
-<img src="Screenshots/screenshot_prediction.jpg" width="600"/>
+### 🔹 3.
+<img src="Screenshots/0003.jpg" width="600"/>
+
+---
+
+### 🔹 4.
+<img src="Screenshots/0004.jpg" width="600"/>
 
 ---
 
