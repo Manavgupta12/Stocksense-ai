@@ -111,6 +111,9 @@ df['Weekday'] = df.index.dayofweek  # 0=Monday
 
 df['RSI'] = df['Close'].rolling(14).apply(lambda x: (100 - (100 / (1 + (x.pct_change().mean() / x.pct_change().std())))))
 
+if df.empty or df['RSI'].isnull().all():
+    st.error("⚠️ Unable to fetch valid data for this stock right now. Please try again later or choose another company.")
+    st.stop()
 st.subheader(" RSI Indicator")
 
 if df['RSI'].iloc[-1] > 70:
