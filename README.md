@@ -1,6 +1,6 @@
-# 🤖 TickerBeat AI – The Rythm of Trend
+# 🤖 StockSense AI – AI-Based Stock Price Predictor
 
-**TickerBeat AI** is a web-based stock prediction tool that uses machine learning to forecast stock prices for major companies like Vedanta, Tata Steel, and TCS. Built using Streamlit and Random Forest Regression, it provides interactive visualizations, CSV download options, and prediction sliders.
+**Stocksense AI** is a web-based stock prediction tool that uses machine learning to forecast stock prices for major companies like Vedanta, Tata Steel, and TCS. Built using Streamlit and Random Forest Regression, it provides interactive visualizations, CSV download options, and prediction sliders.
 
 ---
 
