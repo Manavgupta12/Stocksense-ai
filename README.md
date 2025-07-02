@@ -33,26 +33,19 @@
 
 ## 🖼️ App Screenshots
 
-### 🔹 1.
+### 🔹 Home Interface & Company Selector
 <img src="Screenshots/0001.jpg" width="600"/>
 
----
-
-### 🔹 2.
+### 🔹 Stock Chart with Price History
 <img src="Screenshots/0002.jpg" width="600"/>
 
----
-
-### 🔹 3.
+### 🔹 Prediction Visualization (ML Output)
 <img src="Screenshots/0003.jpg" width="600"/>
 
----
-
-### 🔹 4.
+### 🔹 Feature Importance & AI Suggestions
 <img src="Screenshots/0004.jpg" width="600"/>
 
 ---
-
 ## ⚙️ Tech Stack
 
 | Tool            | Purpose                       |
@@ -69,10 +62,10 @@
 ## 🧪 Local Installation
 
 ```bash
-git clone https://github.com/Manavgupta12/tickerbeat-ai.git
-cd tickerbeat-ai    
+git clone https://github.com/Manavgupta12/Stocksense-ai.git
+cd Stocksense-ai    
 pip install -r requirements.txt
-streamlit run apple.py
+streamlit run app.py
 
 ```
 📝 License
