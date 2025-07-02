@@ -42,7 +42,7 @@ if page == "ℹ️ About This App":
 def load_data(ticker, start_date, end_date):
     return yf.download(ticker, start=start_date, end=end_date)
 
-st.title('Stocksense – AI-Based Stock Predictor')
+st.title('Stocksense – AI-Based Stock Price Predictor')
 st.markdown("""
 This tool uses **Random Forest Regression** to analyze stock trends and forecast prices for up to 30 days ahead. It supports multiple companies and provides downloadable prediction data.
 """)
