@@ -56,6 +56,8 @@ st.markdown("""
 *No financial knowledge needed — the app explains everything!*
 """)
 
+st.markdown("---")
+
 # User inputs with dropdown for multiple companies
 companies = {
     'Vedanta Limited': 'VEDL.NS',
@@ -98,13 +100,20 @@ except:
     pass  # Don't crash the app if logo isn't found
 
 
-# Load data
-df = load_data(user_input, start_date, end_date)
+# ✅ Error handling after data fetch
+try:
+    df = load_data(user_input, start_date, end_date)
+except Exception as e:
+    st.error(f"⚠️ Failed to fetch stock data: {e}")
+    st.stop()
 
-# Check if data is empty or invalid
-if df.empty or df['Close'].isnull().all():
+# ✅ Extra validation to catch empty or invalid data
+if df.empty or ('Close' not in df.columns) or df['Close'].isnull().all():
     st.error("❌ Failed to load valid stock data. Please try again later or choose another company.")
     st.stop()
+
+st.markdown("---")
+
 
 # Basic Visualizations
 st.subheader(f'{selected_company} Data Overview (2014-2024)')
@@ -164,7 +173,7 @@ model.fit(X_train, y_train)
 predictions = model.predict(X_test)
 
 st.write(" **Actual vs Predicted sample:**")
-st.dataframe(pd.DataFrame({"Actual": y_test[:5], "Predicted": predictions[:5]}))
+st.dataframe(pd.DataFrame({"Actual": y_test, "Predicted": predictions}).tail(5))
 
 # Calculate error
 mse = mean_squared_error(y_test, predictions)
@@ -193,6 +202,8 @@ st.caption(f"Prediction generated on: {datetime.now().strftime('%d %B %Y, %I:%M 
 st.caption("Made with ❤️ using Streamlit and Random Forest by Team Stocksense AI")
 st.pyplot(fig)
 
+st.markdown("---")
+
 # Residual Error Plot
 st.subheader("📉 Prediction Error (Residuals)")
 errors = y_test - predictions
@@ -205,25 +216,11 @@ ax2.set_ylabel("Error")
 ax2.legend()
 st.pyplot(fig2)
 
+st.markdown("---")
+
 # Analyze change between last actual and predicted value
 change = predictions[-1] - y_test[-1]
 percent_change = (change / y_test[-1]) * 100
-
-# Prediction Export as CSV
-result_df = pd.DataFrame({
-    "Date": df.index[split:],
-    "Actual Price": y_test,
-    "Predicted Price": predictions,
-})
-
-csv = result_df.to_csv(index=False).encode('utf-8')
-st.download_button(
-    label="📥 Download Prediction CSV",
-    data=csv,
-    file_name=f'{selected_company}_prediction.csv',
-    mime='text/csv'
-)
-
 
 st.subheader("Forecast Summary")
 
@@ -254,6 +251,23 @@ else:
 
 st.markdown(f"📌 **Forecasted {days}-day trend** for **{selected_company}**: {suggestions}")
 
+# Prediction Export as CSV
+result_df = pd.DataFrame({
+    "Date": df.index[split:],
+    "Actual Price": y_test,
+    "Predicted Price": predictions,
+})
+
+csv = result_df.to_csv(index=False).encode('utf-8')
+st.download_button(
+    label="📥 Download Prediction CSV",
+    data=csv,
+    file_name=f'{selected_company}_prediction.csv',
+    mime='text/csv'
+)
+
+st.markdown("---")
+
 volatility = df['Volatility'].iloc[-1]
 avg_return = df['Daily_Return'].mean()
 
@@ -262,6 +276,8 @@ col1, col2 = st.columns(2)
 col1.metric("Volatility", f"{volatility:.4f}")
 col2.metric("Avg Daily Return", f"{avg_return:.4f}")
 
+st.markdown("---")
+
 st.subheader("Risk Check – AI Caution")
 
 if df['Volatility'].iloc[-1] > 0.02:
@@ -269,11 +285,15 @@ if df['Volatility'].iloc[-1] > 0.02:
 if df['Daily_Return'].mean() < 0:
     st.info("ℹ️ Average returns are negative over the selected period. Long-term hold may be safer.")
 
+st.markdown("---")
+
 st.subheader("Your Notes")
 user_notes = st.text_area("Add your personal thoughts, trade ideas, or interpretations.")
 
 # Save user notes to a file
 st.download_button("💾 Download Your Notes", user_notes.encode('utf-8'), file_name=f"{selected_company}_notes.txt")
+
+st.markdown("---")
 
 # Feature Importance
 st.subheader('What the AI Thinks Matters Most')
