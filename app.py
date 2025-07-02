@@ -16,7 +16,7 @@ st.sidebar.markdown("**Algorithm Type:** Supervised Regression (Ensemble)")
 
 
 if page == "ℹ️ About This App":
-    st.title("ℹ️ About TickerBeat AI")
+    st.title("ℹ️ About Stocksense AI")
     st.markdown("""
     This project uses machine learning (Random Forest) to forecast stock prices for popular Indian companies.
 
@@ -42,7 +42,7 @@ if page == "ℹ️ About This App":
 def load_data(ticker, start_date, end_date):
     return yf.download(ticker, start=start_date, end=end_date)
 
-st.title('TickerBeat – The Rythm of Trend')
+st.title('Stocksense – AI-Based Stock Predictor')
 st.markdown("""
 This tool uses **Random Forest Regression** to analyze stock trends and forecast prices for up to 30 days ahead. It supports multiple companies and provides downloadable prediction data.
 """)
@@ -72,6 +72,7 @@ companies = {
     'Bharti Airtel': 'BHARTIARTL.NS',
     'Adani Enterprises': 'ADANIENT.NS'
 }
+
 days = st.slider("📆 Predict how many days ahead?", min_value=1, max_value=30, value=7)
 
 selected_company = st.selectbox(
@@ -88,8 +89,22 @@ user_input = companies[selected_company]
 start_date = '2014-01-01'
 end_date = '2024-12-31'
 
+try:
+    ticker_info = yf.Ticker(user_input).info
+    logo_url = ticker_info.get("logo_url", "")
+    if logo_url:
+        st.image(logo_url, width=80)
+except:
+    pass  # Don't crash the app if logo isn't found
+
+
 # Load data
 df = load_data(user_input, start_date, end_date)
+
+# Check if data is empty or invalid
+if df.empty or df['Close'].isnull().all():
+    st.error("❌ Failed to load valid stock data. Please try again later or choose another company.")
+    st.stop()
 
 # Basic Visualizations
 st.subheader(f'{selected_company} Data Overview (2014-2024)')
@@ -110,6 +125,10 @@ df['Price_Change'] = df['Close'] - df['Open']
 df['Weekday'] = df.index.dayofweek  # 0=Monday
 
 df['RSI'] = df['Close'].rolling(14).apply(lambda x: (100 - (100 / (1 + (x.pct_change().mean() / x.pct_change().std())))))
+
+if 'RSI' not in df.columns or df['RSI'].dropna().empty:
+    st.error("⚠️ RSI values could not be calculated. Try selecting a different company or time window.")
+    st.stop()
 
 if df.empty or df['RSI'].isnull().all():
     st.error("⚠️ Unable to fetch valid data for this stock right now. Please try again later or choose another company.")
@@ -171,7 +190,7 @@ ax.set_title(f'{selected_company} Price Prediction')
 ax.legend()
 from datetime import datetime
 st.caption(f"Prediction generated on: {datetime.now().strftime('%d %B %Y, %I:%M %p')}")
-st.caption("Made with ❤️ using Streamlit and Random Forest by Team TickerBeat AI")
+st.caption("Made with ❤️ using Streamlit and Random Forest by Team Stocksense AI")
 st.pyplot(fig)
 
 # Residual Error Plot
@@ -190,8 +209,23 @@ st.pyplot(fig2)
 change = predictions[-1] - y_test[-1]
 percent_change = (change / y_test[-1]) * 100
 
+# Prediction Export as CSV
+result_df = pd.DataFrame({
+    "Date": df.index[split:],
+    "Actual Price": y_test,
+    "Predicted Price": predictions,
+})
 
-st.subheader("Market Insight & AI Interpretation")
+csv = result_df.to_csv(index=False).encode('utf-8')
+st.download_button(
+    label="📥 Download Prediction CSV",
+    data=csv,
+    file_name=f'{selected_company}_prediction.csv',
+    mime='text/csv'
+)
+
+
+st.subheader("Forecast Summary")
 
 if percent_change < -2:
     if df['RSI'].iloc[-1] > 70:
@@ -234,24 +268,6 @@ if df['Volatility'].iloc[-1] > 0.02:
     st.warning("⚠️ High market volatility detected. Be cautious with short-term trades.")
 if df['Daily_Return'].mean() < 0:
     st.info("ℹ️ Average returns are negative over the selected period. Long-term hold may be safer.")
-
-
-# Prediction Export as CSV
-result_df = pd.DataFrame({
-    "Date": df.index[split:],
-    "Actual Price": y_test,
-    "Predicted Price": predictions,
-    "AI Advice": suggestions
-})
-
-csv = result_df.to_csv(index=False).encode('utf-8')
-st.download_button(
-    label="📥 Download Prediction CSV",
-    data=csv,
-    file_name=f'{selected_company}_prediction.csv',
-    mime='text/csv'
-)
-
 
 st.subheader("Your Notes")
 user_notes = st.text_area("Add your personal thoughts, trade ideas, or interpretations.")
