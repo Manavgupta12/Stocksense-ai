@@ -6,8 +6,7 @@
 
 ## 🚀 Live Demo
 
-[![Open in Streamlit](https://img.shields.io/badge/Streamlit-Live%20App-orange?logo=streamlit)](https://tickerbeat-ai-ehsh2dawaeymf9mdkdmfnw.streamlit.app)
-
+[![Open in Streamlit](https://img.shields.io/badge/Streamlit-Live%20App-orange?logo=streamlit)](https://stocksense-ai-gsdkkfmt3ixwpcz5w7ruvh.streamlit.app)
 ---
 
 ## 🧠 Features
